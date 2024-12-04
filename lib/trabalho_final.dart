@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main(){
+void main() {
   runApp(const Myapp());
 }
 
@@ -15,24 +15,34 @@ class Myapp extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
         body: Center(
           child: Container(
-              height: 300,
-              width: 300,
-              decoration: BoxDecoration(
-                color: Colors.purpleAccent,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50),
-              child: Text(
-                "Resolve Prob",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
+            height: 700,
+            width: 450,
+            decoration: BoxDecoration(
+              color: Colors.purpleAccent,
+              borderRadius: BorderRadius.circular(30),
             ),
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50),
+            child: Column(
+              children: [
+                Icon(
+                  Icons.account_balance_wallet,
+                  color: Colors.white,
+                  size: 120,
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "PocketCash",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-        ),
-      );
+      ),
+    );
   }
 }
