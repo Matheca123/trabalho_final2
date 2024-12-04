@@ -15,13 +15,24 @@ class Myapp extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
         body: Center(
           child: Container(
-            height: 300,
-            width: 300,
-            color: Colors.deepOrange,
-            child: Text("Tenho aids"),
-          ),
+              height: 300,
+              width: 300,
+              decoration: BoxDecoration(
+                color: Colors.purpleAccent,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50),
+              child: Text(
+                "Resolve Prob",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ),
         ),
-      ),
-    );
+        ),
+      );
   }
 }
