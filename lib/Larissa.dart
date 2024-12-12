@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'david.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -22,16 +22,43 @@ class BudgetPage extends StatefulWidget {
 }
 
 class _BudgetPageState extends State<BudgetPage> {
-  double _totalInvestimentos = 0;
-  double _totalDividas = 0;
-  
-  final List<Map<String, dynamic>> _investimento =[];
-  final List<Map<String, dynamic>> _dividas =[];
+  double _orcamento = 0;
+  double _totalDespesas = 0;
+  double _totalInvestimentos = 0; // eu adicionei essa função
+  double _totalDividas = 0; // essa também
+
+  final List<Map<String, dynamic>> _despesas = [];
+  final List<Map<String, dynamic>> _investimento =[]; // eu adicionei essa também
+  final List<Map<String, dynamic>> _dividas =[]; // essa também
 
   final TextEditingController _valorController = TextEditingController();
   final TextEditingController _descricaoController = TextEditingController();
 
-  void _adicionarInvestimento (){
+  void _adicionarDespesa() {
+    final double valor = double.tryParse(_valorController.text.replaceAll(',', '.')) ?? 0;
+    final String descricao = _descricaoController.text;
+
+    if (valor > 0 && descricao.isNotEmpty) {
+      setState(() {
+        _despesas.add({'descricao': descricao, 'valor': valor});
+        _totalDespesas += valor;
+      });
+      _valorController.clear();
+      _descricaoController.clear();
+    }
+  }
+
+  void _definirOrcamento() {
+    final double valor = double.tryParse(_valorController.text.replaceAll(',', '.')) ?? 0;
+    if (valor > 0) {
+      setState(() {
+        _orcamento += valor;
+      });
+      _valorController.clear();
+    }
+  }
+
+  void _adicionarInvestimento() {
     final double valor = double.tryParse(_valorController.text.replaceAll(',','.')) ?? 0;
     final String descricao = _descricaoController.text;
 
@@ -43,8 +70,9 @@ class _BudgetPageState extends State<BudgetPage> {
       _valorController.clear();
       _descricaoController.clear();
     }
-  }
-   void _adicionarDivida (){
+  }  // adicionei esse void
+
+   void _adicionarDivida() {
     final double valor = double.tryParse(_valorController.text.replaceAll(',', '.')) ?? 0;
     final String descricao = _descricaoController.text;
 
@@ -56,10 +84,10 @@ class _BudgetPageState extends State<BudgetPage> {
       _valorController.clear();
       _descricaoController.clear();
     }
-  }
+  }   // adicionei esse void
 
   double _calcularSaldo() {
-    return _orcamento - _totalDespesas - _totalDividas;
+    return _orcamento - _totalDespesas - _totalDividas; 
   } // esse já tinha eu só coloque totalDividas
 
   @override
@@ -140,8 +168,16 @@ class _BudgetPageState extends State<BudgetPage> {
               ),
               SizedBox(height: 20),
               Text(
-                'Dívidas Totais: R\$${_totalDividas.toStringAsFixed(2)}',
+                'Despesas Totais: R\$${_totalDespesas.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 16),
+              ),
+              Text(
+                'Investimentos Totais: R\$${_totalInvestimentos.toStringAsFixed(2)}',
+                style: TextStyle(fontSize: 16), // essa parte do invetimento e da dívida sao minha 
+              ),
+              Text(
+                'Dívidas Totais: R\$${_totalDividas.toStringAsFixed(2)}',
+                style: TextStyle(fontSize: 16), // essa também
               ),
               Text(
                 'Sobrou: R\$${_calcularSaldo().toStringAsFixed(2)}',
@@ -170,7 +206,7 @@ class _BudgetPageState extends State<BudgetPage> {
                     ),
                   ),
                 ],
-              ),
+              ), // essas são meus 
               Expanded(
                 child: ListView(
                   children: <Widget>[
@@ -205,7 +241,7 @@ class _BudgetPageState extends State<BudgetPage> {
                         ListTile(
                           title: Text(divida['descricao']),
                           trailing: Text('R\$${divida['valor'].toStringAsFixed(2)}'),
-                        ),
+                        ), // investimento e Dívida são meus
                     ],
                   ],
                 ),
