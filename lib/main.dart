@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
-import 'telaLogin.dart'; 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'telaLogin.dart';  
 
-void main() {
-  runApp(const Myapp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
 }
 
-class Myapp extends StatelessWidget {
-  const Myapp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: HomePage(),  
     );
   }
 }
@@ -53,7 +59,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Telalogin()),
+                    MaterialPageRoute(builder: (context) => Telalogin()), 
                   );
                 },
                 style: ElevatedButton.styleFrom(

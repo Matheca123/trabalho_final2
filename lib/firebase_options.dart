@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'primeiroprojeto-b2585.firebasestorage.app',
     measurementId: 'G-4WFR1DN6FD',
   );
+
 }
