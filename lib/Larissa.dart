@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'david.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -22,41 +22,14 @@ class BudgetPage extends StatefulWidget {
 }
 
 class _BudgetPageState extends State<BudgetPage> {
-  double _orcamento = 0;
-  double _totalDespesas = 0;
-  double _totalInvestimentos = 0; // eu adicionei essa função
-  double _totalDividas = 0; // essa também
-
-  final List<Map<String, dynamic>> _despesas = [];
-  final List<Map<String, dynamic>> _investimento =[]; // eu adicionei essa também
-  final List<Map<String, dynamic>> _dividas =[]; // essa também
+  double _totalInvestimentos = 0;
+  double _totalDividas = 0;
+  
+  final List<Map<String, dynamic>> _investimento =[];
+  final List<Map<String, dynamic>> _dividas =[];
 
   final TextEditingController _valorController = TextEditingController();
   final TextEditingController _descricaoController = TextEditingController();
-
-  void _adicionarDespesa() {
-    final double valor = double.tryParse(_valorController.text.replaceAll(',', '.')) ?? 0;
-    final String descricao = _descricaoController.text;
-
-    if (valor > 0 && descricao.isNotEmpty) {
-      setState(() {
-        _despesas.add({'descricao': descricao, 'valor': valor});
-        _totalDespesas += valor;
-      });
-      _valorController.clear();
-      _descricaoController.clear();
-    }
-  }
-
-  void _definirOrcamento() {
-    final double valor = double.tryParse(_valorController.text.replaceAll(',', '.')) ?? 0;
-    if (valor > 0) {
-      setState(() {
-        _orcamento += valor;
-      });
-      _valorController.clear();
-    }
-  }
 
   void _adicionarInvestimento (){
     final double valor = double.tryParse(_valorController.text.replaceAll(',','.')) ?? 0;
@@ -71,8 +44,6 @@ class _BudgetPageState extends State<BudgetPage> {
       _descricaoController.clear();
     }
   }
-    // adicionei esse void
-
    void _adicionarDivida (){
     final double valor = double.tryParse(_valorController.text.replaceAll(',', '.')) ?? 0;
     final String descricao = _descricaoController.text;
@@ -86,12 +57,10 @@ class _BudgetPageState extends State<BudgetPage> {
       _descricaoController.clear();
     }
   }
-    // adicionei esse void
 
   double _calcularSaldo() {
     return _orcamento - _totalDespesas - _totalDividas;
-  }
-     // esse já tinha eu só coloque totalDividas
+  } // esse já tinha eu só coloque totalDividas
 
   @override
    Widget build(BuildContext context) {
@@ -170,14 +139,6 @@ class _BudgetPageState extends State<BudgetPage> {
                 ],
               ),
               SizedBox(height: 20),
-              Text(
-                'Despesas Totais: R\$${_totalDespesas.toStringAsFixed(2)}',
-                style: TextStyle(fontSize: 16),
-              ),
-              Text(
-                'Investimentos Totais: R\$${_totalInvestimentos.toStringAsFixed(2)}',
-                style: TextStyle(fontSize: 16),
-              ),
               Text(
                 'Dívidas Totais: R\$${_totalDividas.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 16),
